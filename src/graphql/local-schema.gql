@@ -1,0 +1,15 @@
+type Query {
+  authenticated: Boolean!
+  volumeForm: VolumeForm!
+}
+
+type NovelPagination {
+  hasNext: Boolean!
+  hasPrev: Boolean!
+}
+
+type VolumeForm {
+  open: Boolean!
+  vid: String
+  name: String
+}

@@ -1,0 +1,82 @@
+mutation login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    ...UserFragment
+    ...ErrorFragment
+  }
+}
+
+mutation register($username: String!, $password: String!) {
+  register(username: $username, password: $password) {
+    ...UserFragment
+    ...ErrorFragment
+  }
+}
+
+mutation createNovel($novel: NovelInput!) {
+  createNovel(novel: $novel) {
+    ...NovelBriefFragment
+    ...ErrorFragment
+  }
+}
+
+mutation createVolume($nid: ID!, $volume: VolumeInput!) {
+  createVolume(nid: $nid, volume: $volume) {
+    ...NovelDetailFragment
+    ...ErrorFragment
+  }
+}
+
+mutation createChapter($nid: ID!, $vid: ID!, $chapter: ChapterInput!) {
+  createChapter(nid: $nid, vid: $vid, chapter: $chapter) {
+    ... on Chapter {
+      nid
+      cid
+    }
+    ...ErrorFragment
+  }
+}
+
+mutation updateNovel($nid: ID!, $update: NovelInput!) {
+  updateNovel(nid: $nid, update: $update) {
+    ...NovelDetailFragment
+    ...ErrorFragment
+  }
+}
+
+mutation updateVolume($nid: ID!, $vid: ID!, $name: String) {
+  updateVolume(nid: $nid, vid: $vid, name: $name) {
+    ...NovelDetailFragment
+    ...ErrorFragment
+  }
+}
+
+mutation updateChapter($nid: ID!, $cid: ID!, $update: ChapterInput!) {
+  updateChapter(nid: $nid, cid: $cid, update: $update) {
+    ... on Chapter {
+      cid
+      nid
+    }
+    ...ErrorFragment
+  }
+}
+
+mutation deleteNovel($nid: ID!) {
+  deleteNovel(nid: $nid) {
+    status
+    msg
+  }
+}
+
+mutation deleteVolume($nid: ID!, $vid: ID!) {
+  deleteVolume(nid: $nid, vid: $vid) {
+    ...NovelDetailFragment
+    ...ErrorFragment
+  }
+}
+
+mutation deleteChapter($nid: ID!, $cid: ID!) {
+  deleteChapter(nid: $nid, cid: $cid) {
+    ...NovelDetailFragment
+    ...ErrorFragment
+  }
+}

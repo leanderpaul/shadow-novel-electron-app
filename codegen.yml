@@ -1,0 +1,17 @@
+overwrite: true
+schema:
+  - 'http://localhost:8080/graphql'
+  - src/graphql/local-schema.gql
+documents:
+  - src/graphql/fragments.gql
+  - src/graphql/queries.gql
+  - src/graphql/mutations.gql
+generates:
+  src/typescript/graphql.types.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      skipTypeNameForRoot: true
+      nonOptionalTypename: true

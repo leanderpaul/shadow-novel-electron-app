@@ -1,0 +1,46 @@
+fragment ErrorFragment on Error {
+  code
+  message
+}
+
+fragment UserFragment on User {
+  username
+  token
+}
+
+fragment NovelBriefFragment on Novel {
+  nid
+  cover
+  title
+  author
+  desc
+  genre
+}
+
+fragment NovelDetailFragment on Novel {
+  nid
+  cover
+  title
+  author
+  desc
+  genre
+  status
+  tags
+  views
+  volumes {
+    vid
+    name
+    chapters {
+      entries {
+        cid
+        title
+        index
+        createdAt
+      }
+    }
+  }
+  chapters {
+    totalCount
+  }
+  createdAt
+}

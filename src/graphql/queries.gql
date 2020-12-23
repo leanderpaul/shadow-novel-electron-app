@@ -1,0 +1,118 @@
+query auth {
+  authenticated @client
+}
+
+query volumeModal {
+  volumeForm @client {
+    open
+    vid
+    name
+  }
+}
+
+query user {
+  user {
+    ... on User {
+      username
+      token
+    }
+    ...ErrorFragment
+  }
+}
+
+query server {
+  status
+}
+
+query novelList($filter: NovelFilter, $limit: Int, $offset: Int, $sort: NovelSort) {
+  novels(filter: $filter, limit: $limit, offset: $offset, sort: $sort) {
+    entries {
+      ...NovelBriefFragment
+    }
+    offset
+    limit
+    totalCount
+  }
+}
+
+query myNovels {
+  user {
+    ... on User {
+      novels {
+        entries {
+          nid
+          cover
+          title
+          views
+          chapters(limit: 1, sortDirection: DESC) {
+            totalCount
+            entries {
+              cid
+              index
+              title
+            }
+          }
+        }
+        offset
+        limit
+        totalCount
+        hasNext @client
+        hasPrev @client
+      }
+    }
+    ...ErrorFragment
+  }
+}
+
+query novelDetails($nid: ID!) {
+  novel(nid: $nid) {
+    ...NovelDetailFragment
+  }
+}
+
+query novelInfo($nid: ID!) {
+  novel(nid: $nid) {
+    nid
+    cover
+    title
+    desc
+    status
+    genre
+    tags
+  }
+}
+
+query chapterInfo($nid: ID!, $cid: ID!) {
+  novel(nid: $nid) {
+    nid
+    chapter(cid: $cid) {
+      cid
+      title
+      content
+      matureContent
+    }
+  }
+}
+
+query volumeInfo($nid: ID!) {
+  novel(nid: $nid) {
+    nid
+    volumes {
+      vid
+      name
+    }
+  }
+}
+
+query chapterDetails($nid: ID!, $cid: ID!) {
+  novel(nid: $nid) {
+    nid
+    title
+    chapter(cid: $cid) {
+      cid
+      index
+      title
+      content
+    }
+  }
+}
